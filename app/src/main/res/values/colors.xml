@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FF5722</color>
+    <color name="colorPrimaryDark">#E64A19</color>
+    <color name="colorAccent">#FFEB3B</color>
+    <color name="customGrey">#58585A</color>
+    <color name="color_white">#FFFFFF</color>
+    <color name="splashBG">#E04526</color>
+    <color name="cardview_initial_background">#71C3DE</color>
+    <color name="colorBar">#1F1F1F</color>
+</resources>

@@ -1,4 +1,4 @@
-package com.apppartner.androidprogrammertest;
+package com.apppartner.androidprogrammertest.Activities;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -13,6 +13,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.apppartner.androidprogrammertest.R;
+import com.apppartner.androidprogrammertest.Utils;
 
 
 public class AnimationActivity extends AppCompatActivity implements View.OnTouchListener {
@@ -40,13 +43,12 @@ public class AnimationActivity extends AppCompatActivity implements View.OnTouch
         Toolbar toolbarTop = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbarTop);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         titleTextView = (TextView) toolbarTop.findViewById(R.id.textViewTitle);
         titleTextView.setText("Animation");
-        CustomTextView customTextView = new CustomTextView(this);
-        customTextView.setViewCustomFont(titleTextView, "fonts/Jelloween - Machinato ExtraLight.ttf", this);
+
+        Utils.setFont(titleTextView, "fonts/Jelloween - Machinato ExtraLight.ttf", this);
 
     }
 

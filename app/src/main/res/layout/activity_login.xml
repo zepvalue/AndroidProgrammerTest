@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.apppartner.androidprogrammertest.AnimationActivity"
+    tools:context="com.apppartner.androidprogrammertest.Activities.AnimationActivity"
     android:background="@drawable/bg_login">
 
     <include layout="@layout/toolbar" />

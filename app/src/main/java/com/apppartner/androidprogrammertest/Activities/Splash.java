@@ -1,4 +1,4 @@
-package com.apppartner.androidprogrammertest;
+package com.apppartner.androidprogrammertest.Activities;
 
 
 import android.app.Activity;
@@ -11,6 +11,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.apppartner.androidprogrammertest.R;
 
 /**
  * Created by filip on 2/24/2015.

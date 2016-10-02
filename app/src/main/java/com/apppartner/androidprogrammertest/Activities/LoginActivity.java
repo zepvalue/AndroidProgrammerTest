@@ -1,4 +1,4 @@
-package com.apppartner.androidprogrammertest;
+package com.apppartner.androidprogrammertest.Activities;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -12,6 +12,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.apppartner.androidprogrammertest.MyApplication;
+import com.apppartner.androidprogrammertest.R;
+import com.apppartner.androidprogrammertest.Utils;
 
 import org.json.JSONObject;
 
@@ -38,26 +42,18 @@ public class LoginActivity extends AppCompatActivity {
 
         usernameEditText = (EditText) findViewById(R.id.editTextUsername);
         passwordEditText = (EditText) findViewById(R.id.editTextPassword);
-        CustomTextView customTextView = new CustomTextView(this);
-        customTextView.setEditTextViewCustomFont(usernameEditText, "fonts/Jelloween - Machinato.ttf", this);
-        customTextView.setEditTextViewCustomFont(passwordEditText, "fonts/Jelloween - Machinato.ttf", this);
-
-//        Toolbar toolbarTop = (Toolbar) findViewById(R.id.toolbar);
-//        titleTextView = (TextView) toolbarTop.findViewById(R.id.textViewTitle);
-//        Typeface fontToolbar = Typeface.createFromAsset(getAssets(), "fonts/Jelloween - Machinato Bold.ttf");
-//        titleTextView.setText(this.getClass().getSimpleName());
-//        titleTextView.setTypeface(fontToolbar);
+        Utils.setFont(usernameEditText, "fonts/Jelloween - Machinato.ttf", this);
+        Utils.setFont(passwordEditText, "fonts/Jelloween - Machinato.ttf", this);
 
         Toolbar toolbarTop = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbarTop);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         titleTextView = (TextView) toolbarTop.findViewById(R.id.textViewTitle);
         titleTextView.setText("Login");
 
-        customTextView.setViewCustomFont(titleTextView, "fonts/Jelloween - Machinato ExtraLight.ttf", this);
+        Utils.setFont(titleTextView, "fonts/Jelloween - Machinato ExtraLight.ttf", this);
 
     }
 
@@ -163,21 +159,25 @@ public class LoginActivity extends AppCompatActivity {
                         JSONObject json = new JSONObject(result);
                         String code = json.getString("code");
                         String message = json.getString("message");
-
-                            if(code.equals("Success"))
-                            {
-                                AlertDialog.Builder alert = new AlertDialog.Builder(LoginActivity.this);
-                                alert.setTitle("Status");
-                                alert.setMessage(code + " " + message + "\n" + "Elapsed Time: " + String.valueOf(elapsedTime) + " milliseconds");
-                                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        MyApplication myApplication = (MyApplication)getApplicationContext();
+                        if(code.equals("Success"))
+                        {
+                            myApplication.setLogged(true);
+                            AlertDialog.Builder alert = new AlertDialog.Builder(LoginActivity.this);
+                            alert.setTitle("Status");
+                            alert.setMessage(code + " " + message + "\n" + "Elapsed Time: " + String.valueOf(elapsedTime) + " milliseconds");
+                            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
-                                    mainIntent.putExtra("extraResponse" , "Logged" );
                                     startActivity(mainIntent);
                                 }
                             });
-                                alert.show();
-                            }
+                            alert.show();
+                        }
+                        else
+                        {
+                            myApplication.setLogged(false);
+                        }
                 }
                 catch (Exception ex)
                 {

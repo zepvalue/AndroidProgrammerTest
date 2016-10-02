@@ -1,4 +1,4 @@
-package com.apppartner.androidprogrammertest;
+package com.apppartner.androidprogrammertest.Activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -11,6 +11,9 @@ import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.apppartner.androidprogrammertest.MyApplication;
+import com.apppartner.androidprogrammertest.R;
+import com.apppartner.androidprogrammertest.Utils;
 import com.apppartner.androidprogrammertest.adapters.ChatsArrayAdapter;
 import com.apppartner.androidprogrammertest.models.ChatData;
 
@@ -43,21 +46,18 @@ public class ChatActivity extends AppCompatActivity
         Toolbar toolbarTop = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbarTop);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         titleTextView = (TextView) toolbarTop.findViewById(R.id.textViewTitle);
         titleTextView.setText("Chat");
 
-        CustomTextView customTextView = new CustomTextView(this);
-        customTextView.setViewCustomFont(titleTextView, "fonts/Jelloween - Machinato ExtraLight.ttf", this);
+        Utils.setFont(titleTextView, "fonts/Jelloween - Machinato ExtraLight.ttf", this);
 
         Typeface usernameFont = Typeface.createFromAsset(getAssets(), "fonts/Jelloween - Machinato.ttf");
         Typeface passFont = Typeface.createFromAsset(getAssets(), "fonts/Jelloween - Machinato Light.ttf");
 
-        Intent intentFromMain = getIntent();
-        String response = intentFromMain.getStringExtra("extraResponse");
 
-        if (response.equals("Not Logged"))
+        MyApplication myApplication = (MyApplication)getApplicationContext();
+        if (!myApplication.getLogged())
         {
             AlertDialog.Builder alert = new AlertDialog.Builder(ChatActivity.this);
             alert.setTitle("Error");
@@ -69,11 +69,6 @@ public class ChatActivity extends AppCompatActivity
                 }
             });
             alert.show();
-        }
-        else
-        {
-            Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
-            mainIntent.putExtra("extraResponse", "Logged");
         }
 
             try {
